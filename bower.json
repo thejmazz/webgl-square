@@ -1,0 +1,16 @@
+{
+  "name": "webgl-square",
+  "version": "0.0.0",
+  "homepage": "https://github.com/thejmazz/webgl-square",
+  "authors": [
+    "Julian Mazzitelli <mazzitelli.julian@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
