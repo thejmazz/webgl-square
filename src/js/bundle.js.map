@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.es6.js"],"names":[],"mappings":";;;;IAAM,GAAG,GACM,SADT,GAAG,GACS;0BADZ,GAAG;;AAED,WAAO,CAAC,GAAG,CAAC,eAAe,CAAC,CAAC;CAChC","file":"bundle.js","sourcesContent":["class Car {\n    constructor() {\n        console.log('Making a car!');\n    }\n}\n"],"sourceRoot":"/source/"}
