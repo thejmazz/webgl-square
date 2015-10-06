@@ -5,6 +5,23 @@ var _multiply = require('./multiply');
 
 console.log((0, _multiply.multiply)(5, 3));
 
+function timeout() {
+    var duration = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+    return new Promise(function (resolve, reject) {
+        setTimeout(resolve, duration);
+    });
+}
+
+var p = timeout(1000).then(function () {
+    console.log('first promise');
+    return timeout(2000);
+}).then(function () {
+    console.log('second promise');
+})['catch'](function (err) {
+    throw new Error("hmm");
+});
+
 },{"./multiply":2}],2:[function(require,module,exports){
 "use strict";
 
