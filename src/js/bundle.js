@@ -3,8 +3,7 @@
 
 var _multiply = require('./multiply');
 
-console.log('wheeeess');
-console.log((0, _multiply.multiply)(2, 4));
+console.log((0, _multiply.multiply)(5, 3));
 
 },{"./multiply":2}],2:[function(require,module,exports){
 "use strict";

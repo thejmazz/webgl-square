@@ -79,6 +79,10 @@ gulp.task('serve', ['bundle:watch', 'inject:js'], function() {
             baseDir: dests.src
         }
     });
+
+    watch('./src/js/bundle.js', function() {
+        browserSync.reload();
+    });
 });
 
 gulp.task('default', ['serve']);
