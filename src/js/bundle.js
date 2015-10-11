@@ -46,10 +46,17 @@ exports.Canvas = Canvas;
 
 var _Canvas = require('./Canvas');
 
+
+
 var canvas = new _Canvas.Canvas('canvas', 'body', window.innerWidth, window.innerHeight);
-var gl = canvas.gl;
 
 canvas.clear(0, 0.5, 0, 1);
+
+var vertexShader = "#define GLSLIFY 1\n// Every shader has one function `main`\n// Variables declared in header are paramaters for main\n// Can be attributes or uniforms\n\n// Attribute:\n// * passed in from JS\n// * an array of data that will be processed\n// * shader's main function will be called for each element in this array\n// * typically holds data related to\n//       * positions of vertices\n//       * colours\n//       * texture coordinates\n// * is just an array of numbers - can be interpreted in any way\n\nattribute vec2 aVertexPosition;\n\nvoid main() {\n    // assign to gl_Position - no return statement\n    // 0.0 -> 'depth'. If > 1 or < 1, vertex will not be drawn. Similar to x-index from css.\n    // 1.0 -> homogeneous coordinate used in perspective projection\n    gl_Position = vec4(aVertexPosition, 0.0, 1.0);\n}\n";
+var fragmentShader = "#define GLSLIFY 1\n#ifdef GL_ES\nprecision highp float;\n#endif\n\n// Uniforms are constant unlike attributes\n\n// will pass value for uColor from JS\n// rgba\nuniform vec4 uColor;\n\nvoid main() {\n    gl_FragColor = uColor;\n}\n";
+
+console.log(vertexShader);
+console.log(fragmentShader);
 
 },{"./Canvas":1}]},{},[2])
 

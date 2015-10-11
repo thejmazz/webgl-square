@@ -7,6 +7,7 @@ var watch      = require('gulp-watch');
 var babelify    = require('babelify');
 var browserify  = require('browserify');
 var browserSync = require('browser-sync').create();
+var glslify     = require('glslify');
 var assign      = require('lodash.assign');
 var watchify    = require('watchify');
 var source      = require('vinyl-source-stream');
@@ -28,7 +29,8 @@ var globs = {
 function bundle(watch) {
     var browserifyOpts = {
         entries: files.entryModules,
-        debug: true
+        debug: true,
+        transform: ['babelify', 'glslify']
     };
 
     var bundler;
@@ -37,7 +39,6 @@ function bundle(watch) {
     } else {
         bundler = browserify(browserifyOpts);
     }
-    bundler.transform(babelify);
 
     function rebundle() {
         bundler.bundle()
