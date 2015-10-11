@@ -80,6 +80,41 @@ if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS)) console.log(gl.getShaderInfoL
 if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS)) console.log(gl.getShaderInfoLog(fs));
 if (!gl.getProgramParameter(program, gl.LINK_STATUS)) console.log(gl.getProgramInfoLog(program));
 
+var aspect = canvas.width / canvas.height;
+
+var vertices = new Float32Array([
+// Triangle 1 x1,y1,x2,y2,x3,y3
+-0.5, 0.5 * aspect, 0.5, 0.5 * aspect, 0.5, -0.5 * aspect,
+// Triangle 2
+-0.5, 0.5 * aspect, 0.5, -0.5 * aspect, -0.5, -0.5 * aspect]);
+
+var vbuffer = gl.createBuffer();
+// make vbuffer the 'current' buffer
+gl.bindBuffer(gl.ARRAY_BUFFER, vbuffer);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+var itemSize = 2;
+var numItems = vertices.length / itemSize;
+
+// Use program for any subsequent calls
+gl.useProgram(program);
+// `uColor` could have been in vertex or fragment shader
+program.uColor = gl.getUniformLocation(program, 'uColor');
+// rgba
+gl.uniform4fv(program.uColor, [0.0, 0.3, 0.0, 1.0]);
+
+program.aVertexPosition = gl.getAttribLocation(program, 'aVertexPosition');
+// Explicitly enable attribute and set a pointer
+gl.enableVertexAttribArray(program.aVertexPosition);
+// specify item size: every attribute is composed of two subsequent numbers in the array
+gl.vertexAttribPointer(program.aVertexPosition, itemSize, gl.FLOAT, false, 0, 0);
+
+// Lets gooo
+// gl.TRIANGLES -> draw mode. can also be gl.POINTS or gl.LINES
+// use buffer that is currently bound and call shader program for each attribute
+// as many times as numItems
+gl.drawArrays(gl.TRIANGLES, 0, numItems);
+
 },{"./Canvas":1}]},{},[2])
 
 
