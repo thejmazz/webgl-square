@@ -1,18 +1,6 @@
-import {multiply} from './multiply';
+import {Canvas} from './Canvas';
 
-console.log(multiply(5, 3));
+var canvas = new Canvas('canvas', 'body', window.innerWidth, window.innerHeight);
+var gl = canvas.gl;
 
-function timeout(duration = 0) {
-    return new Promise((resolve, reject) => {
-        setTimeout(resolve, duration);
-    });
-}
-
-var p = timeout(1000).then(() => {
-    console.log('first promise');
-    return timeout(2000);
-}).then(() => {
-    console.log('second promise');
-}).catch(err => {
-    throw new Error("hmm");
-});
+canvas.clear(0,0.5,0,1);
